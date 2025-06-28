@@ -1,0 +1,7 @@
+{
+  "name": "koperasifix",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
