@@ -1,0 +1,97 @@
+<ion-content class="bg-gradient-to-b from-slate-50 to-slate-100">
+  <div class="flex flex-col items-center justify-center min-h-screen px-6">
+    <!-- Logo and header section -->
+    <div class="w-full max-w-sm text-center mb-10">
+      <div class="flex justify-center mb-6">
+        <div class="login-logo-container">
+          <img src="assets/img/logo_.png" alt="Logo KitaAda" class="login-logo-image">
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-800 mb-1">KitaAda</h1>
+      <p class="text-sm text-slate-500 mb-3">Masuk untuk mengelola keuangan Anda</p>
+    </div>
+
+    <!-- Testing account info -->
+    <div class="w-full max-w-sm mb-6">
+      <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+        <p class="text-sm text-slate-700 font-medium mb-2 text-center">Untuk Testing Akun Dummy:</p>
+        <div class="text-xs text-slate-600 space-y-1">
+          <p><strong>Email:</strong> ojan&#64;gmail.com</p>
+          <p><strong>Password:</strong> ojan1234</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login form -->
+    <div class="w-full max-w-sm">
+      <form (ngSubmit)="login()" class="space-y-4 w-full">
+        <!-- Email input -->
+        <div class="relative overflow-hidden rounded-2xl shadow-sm">
+          <ion-item class="bg-white" lines="none">
+            <ion-icon name="mail-outline" slot="start" class="text-teal-500 ml-2" aria-hidden="true"></ion-icon>
+            <ion-input 
+              #emailInput
+              type="email" 
+              placeholder="Email" 
+              [(ngModel)]="email" 
+              name="email" 
+              required
+              inputmode="email"
+              autocomplete="email"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-label="Email"
+              class="text-slate-700 h-14 py-4"></ion-input>
+          </ion-item>
+        </div>
+
+        <!-- Password input -->
+        <div class="relative overflow-hidden rounded-2xl shadow-sm">
+          <ion-item class="bg-white" lines="none">
+            <ion-icon name="lock-closed-outline" slot="start" class="text-teal-500 ml-2" aria-hidden="true"></ion-icon>
+            <ion-input 
+              [type]="showPassword ? 'text' : 'password'" 
+              placeholder="Password" 
+              [(ngModel)]="password"
+              name="password" 
+              required
+              autocomplete="current-password"
+              aria-label="Password"
+              class="text-slate-700 h-14 py-4"></ion-input>
+            <ion-icon 
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+              slot="end" 
+              class="cursor-pointer text-slate-500 mr-2"
+              (click)="toggleShowPassword()"
+              aria-label="Toggle password visibility"></ion-icon>
+          </ion-item>
+        </div>
+
+        <!-- Login button -->
+        <button type="submit" class="w-full py-4 bg-gradient-to-r from-teal-500 to-slate-600 text-white rounded-2xl font-bold text-md shadow-lg flex items-center justify-center mt-6">
+          <ion-icon name="log-in-outline" class="mr-2" aria-hidden="true"></ion-icon>
+          Masuk
+        </button>
+      </form>
+    </div>
+
+    <!-- Admin contact info -->
+    <div class="w-full max-w-sm mt-6">
+      <div class="bg-blur-glass rounded-lg p-4">
+        <p class="text-sm text-teal-800 font-medium text-center mb-3">
+          Mohon Hubungi Admin untuk lupa password
+        </p>
+        <button 
+          (click)="contactAdmin()" 
+          class="w-full py-3 bg-gradient-to-r from-teal-500 to-slate-600 text-white rounded-xl font-medium text-sm shadow-md flex items-center justify-center">
+          <ion-icon name="call-outline" class="mr-2" aria-hidden="true"></ion-icon>
+          Hubungi Admin
+        </button>
+        <p class="text-xs text-teal-700 text-center mt-2">
+          WhatsApp: 6282123996315
+        </p>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

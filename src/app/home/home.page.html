@@ -1,0 +1,209 @@
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="font-sans">
+    <!-- Enhanced Loading indicator -->
+    <div *ngIf="isLoading" class="px-4 pt-6">
+      <div class="loading-skeleton">
+        <div class="animate-pulse">
+          <!-- Header skeleton -->
+          <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-4 px-4 rounded-b-3xl mb-6">
+            <div class="h-4 bg-white/20 rounded w-1/3 mb-2"></div>
+            <div class="bg-white/10 rounded-2xl p-4">
+              <div class="h-4 bg-white/20 rounded w-1/4 mb-2"></div>
+              <div class="h-8 bg-white/20 rounded w-1/2 mb-3"></div>
+              <div class="flex justify-between">
+                <div class="h-3 bg-white/20 rounded w-1/3"></div>
+                <div class="h-6 bg-white/20 rounded w-1/4"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Content skeleton -->
+          <div class="space-y-4">
+            <div class="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+              <div class="h-4 bg-gray-200 rounded w-1/3 mb-2"></div>
+              <div class="h-6 bg-gray-200 rounded w-1/2 mb-3"></div>
+              <div class="h-2 bg-gray-200 rounded-full"></div>
+            </div>
+            
+            <div class="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div class="grid grid-cols-3 gap-4">
+              <div *ngFor="let item of [1,2,3]" class="flex flex-col items-center">
+                <div class="w-14 h-14 bg-gray-200 rounded-2xl mb-2"></div>
+                <div class="h-3 bg-gray-200 rounded w-12"></div>
+              </div>
+            </div>
+            
+            <div class="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+            <div class="space-y-3">
+              <div *ngFor="let item of [1,2,3]" class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                  <div class="flex-1">
+                    <div class="h-4 bg-gray-200 rounded w-1/2 mb-1"></div>
+                    <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                  </div>
+                  <div class="h-4 bg-gray-200 rounded w-16"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div *ngIf="!isLoading" class="card-animate">
+      <!-- Header section with balance -->
+      <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-4 px-4 rounded-b-3xl relative">
+        <!-- Custom header with proper spacing -->
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="font-bold text-xl">Hi {{userName}}</h1>
+          <div class="flex space-x-2">
+            <!-- Add any header buttons here if needed -->
+          </div>
+        </div>
+        
+        <p class="text-blue-100 mb-1">Selamat datang kembali</p>
+        
+        <!-- Balance card -->
+        <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-sm mt-4 card-elevated">
+          <p class="text-white mb-1">Total Simpanan</p>
+          <h2 class="text-3xl font-bold mb-3">{{ totalSimpanan }}</h2>
+          <div class="flex justify-between items-center">
+            <p class="text-xs text-white">Update: {{currentDate | date:'dd MMM yyyy'}}</p>
+            <button class="bg-white text-black px-3 py-1 rounded-full text-xs font-medium btn-press" (click)="navigateToDetailSimpanan()">
+              Lihat Detail
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main content -->
+      <div class="px-4 pt-6">
+        <!-- Loan status section -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="section-header">Status Pinjaman</h3>
+            <a class="text-blue-500 text-sm" routerLink="/pinjaman">Lihat Semua</a>
+          </div>
+          
+          <div class="card-elevated p-4">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <h4 class="font-medium text-gray-800">Pinjaman Aktif</h4>
+                <p class="text-xs text-gray-500">Jatuh Tempo: {{ pinjaman.dueDate }}</p>
+              </div>
+              <span class="status-badge success">{{ pinjaman.status }}</span>
+            </div>
+            <div class="flex items-center">
+              <div class="flex-1">
+                <p class="text-xl font-bold text-gray-800">{{ pinjaman.amount }}</p>
+                <div class="progress-bar mt-2">
+                  <div class="progress-fill" [style.width.%]="pinjaman.progress"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div class="mb-8">
+          <h3 class="section-header">Menu Cepat</h3>
+
+          <div class="grid grid-cols-3 gap-4">
+            <div class="flex flex-col items-center btn-press" (click)="navigateToPinjaman()">
+              <div class="bg-purple-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-2">
+                <ion-icon name="cash-outline" class="text-purple-600 text-xl"></ion-icon>
+              </div>
+              <p class="text-xs text-gray-700 text-center">Pinjaman</p>
+            </div>
+            
+            <div class="flex flex-col items-center btn-press" (click)="navigateToRiwayat()">
+              <div class="bg-orange-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-2">
+                <ion-icon name="time-outline" class="text-orange-600 text-xl"></ion-icon>
+              </div>
+              <p class="text-xs text-gray-700 text-center">Riwayat</p>
+            </div>
+            
+            <div class="flex flex-col items-center btn-press" (click)="navigateToAjukan()">
+              <div class="bg-green-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-2">
+                <ion-icon name="add-circle-outline" class="text-green-600 text-xl"></ion-icon>
+              </div>
+              <p class="text-xs text-gray-700 text-center">Ajukan</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Recent Transactions -->
+        <div class="mb-20">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="section-header">Transaksi Terbaru</h3>
+            <a class="text-blue-500 text-sm" routerLink="/riwayat">Lihat Semua</a>
+          </div>
+          
+          <div class="space-y-3">
+            <div *ngFor="let transaction of recentTransactions" 
+                 class="card-elevated p-4 flex items-center">
+              <div [ngClass]="transaction.type === 'income' ? 'bg-blue-100' : 'bg-red-100'" 
+                   class="w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                <ion-icon [name]="transaction.type === 'income' ? 'arrow-down' : 'arrow-up'" 
+                         [ngClass]="transaction.type === 'income' ? 'text-blue-600' : 'text-red-600'"></ion-icon>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-medium text-gray-800">{{ transaction.title }}</h4>
+                <p class="text-xs text-gray-500">{{ transaction.date }}</p>
+              </div>
+              <p class="font-bold" 
+                 [ngClass]="transaction.type === 'income' ? 'text-blue-600' : 'text-red-600'">
+               {{ transaction.amount }}
+              </p>
+            </div>
+            
+            <!-- Enhanced empty state for transactions -->
+            <div *ngIf="recentTransactions.length === 0" class="empty-state">
+              <div class="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                <ion-icon name="receipt-outline" class="text-gray-400 text-3xl"></ion-icon>
+              </div>
+              <h3 class="text-lg font-medium text-gray-800 mb-2">Belum ada transaksi</h3>
+              <p class="text-gray-500 text-sm">Mulai dengan melakukan simpanan atau pinjaman</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <ion-tab-bar class="border-t border-gray-200 py-2">
+      <ion-tab-button tab="home" selected>
+        <ion-icon name="home"></ion-icon>
+        <ion-label class="text-xs">Home</ion-label>
+      </ion-tab-button>
+      
+      <ion-tab-button routerLink="/pinjaman">
+        <ion-icon name="cash-outline"></ion-icon>
+        <ion-label class="text-xs">Pinjaman</ion-label>
+      </ion-tab-button>
+      
+      <ion-tab-button routerLink="/riwayat">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label class="text-xs">Riwayat</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/ajukan">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-label class="text-xs">Ajukan</ion-label>
+      </ion-tab-button>
+      
+      <ion-tab-button routerLink="/profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label class="text-xs">Profile</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </div>
+</ion-content>

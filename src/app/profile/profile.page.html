@@ -1,0 +1,93 @@
+<ion-content>
+  <!-- Header section with profile photo -->
+  <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-6 px-4 rounded-b-3xl">
+    <div class="flex flex-col items-center">
+      <div class="relative mb-3">
+        <div class="w-24 h-24 rounded-full border-4 border-white overflow-hidden bg-gray-100 flex items-center justify-center card-elevated">
+          <ion-icon name="person" class="text-gray-400 text-5xl" *ngIf="!profile.photoUrl"></ion-icon>
+          <img [src]="profile.photoUrl" alt="Profile Photo" class="w-full h-full object-cover" *ngIf="profile.photoUrl">
+        </div>
+        <input type="file" 
+               accept="image/*" 
+               class="hidden" 
+               #fileInput 
+               (change)="onFileSelected($event)"
+               aria-label="Upload profile photo"
+               title="Upload profile photo">
+        <button class="absolute bottom-0 right-0 bg-white rounded-full p-1 border border-gray-200 shadow-sm btn-press" 
+                (click)="fileInput.click()" 
+                aria-label="Ganti Foto Profil">
+          <ion-icon name="camera" class="text-teal-500 text-lg"></ion-icon>
+        </button>
+      </div>
+      <h2 class="text-xl font-bold mb-1">{{ profile.name }}</h2>
+      <p class="text-sm text-blue-100">Anggota Koperasi</p>
+    </div>
+  </div>
+  
+  <div class="font-sans">
+    <!-- Profile Information -->
+    <div class="px-4 pt-6">
+      <div class="card-elevated p-5 mb-5 card-animate">
+        <h3 class="section-header">Informasi Profil</h3>
+        
+        <div class="space-y-4">
+          <div class="flex flex-col">
+            <span class="text-xs text-gray-500 mb-1">Nama Lengkap</span>
+            <span class="text-sm font-medium text-gray-800">{{ profile.name }}</span>
+          </div>
+          
+          <div class="flex flex-col">
+            <span class="text-xs text-gray-500 mb-1">Email</span>
+            <span class="text-sm font-medium text-gray-800">{{ profile.email }}</span>
+          </div>
+          
+          <div class="flex flex-col">
+            <span class="text-xs text-gray-500 mb-1">Nomor Telepon</span>
+            <span class="text-sm font-medium text-gray-800">{{ profile.phone }}</span>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-xs text-gray-500 mb-1">Tanggal Bergabung</span>
+            <span class="text-sm font-medium text-gray-800">{{ profile.joinDate }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="w-full bg-red-50 border border-red-200 text-red-600 py-3 rounded-xl text-sm font-medium flex items-center justify-center mb-20 btn-press hover:bg-red-100 transition-colors"
+              (click)="logout()">
+        <ion-icon name="log-out-outline" class="mr-2"></ion-icon>
+        Keluar
+      </button>
+    </div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <ion-tab-bar class="border-t border-gray-200 py-2">
+    <ion-tab-button tab="home" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label class="text-xs">Home</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="pinjaman" routerLink="/pinjaman">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-label class="text-xs">Pinjaman</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="riwayat" routerLink="/riwayat">
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-label class="text-xs">Riwayat</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ajukan" routerLink="/ajukan">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label class="text-xs">Ajukan</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="Profile" selected>
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label class="text-xs">Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-content>

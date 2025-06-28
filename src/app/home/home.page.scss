@@ -1,0 +1,192 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+// Main container styling
+.ion-padding {
+  background: #f5f7fa;
+  padding-top: 20px;
+}
+
+// Card styling
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+ion-card-header {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  padding-bottom: 8px;
+}
+
+ion-card-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon {
+  margin-right: 8px;
+  font-size: 1.4rem;
+}
+
+ion-card-content {
+  padding: 16px;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 5px 0;
+    color: #333;
+  }
+
+  p {
+    color: #666;
+    margin: 5px 0;
+  }
+}
+
+.balance {
+  color: #2ecc71 !important;
+  font-size: 2rem !important;
+  font-weight: 700;
+}
+
+.update-date {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
+
+.loan-amount {
+  font-weight: 600 !important;
+  color: #3498db !important;
+  font-size: 1.2rem !important;
+}
+
+.loan-date {
+  font-size: 0.9rem;
+}
+
+// Navigation section styling
+.nav-title {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 20px 0 10px;
+  padding-left: 5px;
+  border-left: 4px solid #4facfe;
+}
+
+// Navigation button styling
+.nav-button {
+  --border-radius: 10px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+  height: 48px;
+  font-weight: 500;
+  
+  
+  &:hover {
+    --opacity: 0.9;
+  }
+
+  ion-icon {
+    font-size: 1.2rem;
+  }
+}
+
+ion-grid {
+  padding: 0;
+}
+
+// Status badge styling
+ion-badge {
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+// Loan item styling
+.loan-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+// Custom styles to complement Tailwind CSS
+// These styles are for elements that may need specific adjustments
+
+// Add some padding at the bottom to ensure content isn't hidden behind tab bar
+ion-content::part(scroll) {
+  padding-bottom: 70px;
+  
+}
+
+// Ensure Ionic components work well with Tailwind
+ion-tab-bar {
+  --background: white;
+  padding-bottom: env(safe-area-inset-bottom);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+ion-tab-button {
+  --ripple-color: rgba(59, 130, 246, 0.1);
+  
+  &[selected] {
+    ion-icon, ion-label {
+      color: #82afb3 !important;
+      font-weight: 500;
+    }
+  }
+}
+
+// Override some Ionic defaults
+ion-toolbar {
+  --background: transparent;
+}
+
+ion-header.ion-no-border {
+  position: absolute;
+}
+
+// Enhance card appearance
+.rounded-2xl {
+  overflow: hidden;
+}

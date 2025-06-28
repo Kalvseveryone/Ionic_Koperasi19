@@ -1,0 +1,241 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+/**
+ * Custom CSS Variables
+ * -----------------------------------------------------
+ * Custom variables for enhanced theming
+ */
+
+:root {
+  // Primary colors
+  --ion-color-primary: #14b8a6;
+  --ion-color-primary-rgb: 20, 184, 166;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #12a295;
+  --ion-color-primary-tint: #2cbfaf;
+  
+  // Secondary colors
+  --ion-color-secondary: #475569;
+  --ion-color-secondary-rgb: 71, 85, 105;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #3e4d5e;
+  --ion-color-secondary-tint: #596579;
+  
+  // Success colors
+  --ion-color-success: #10b981;
+  --ion-color-success-rgb: 16, 185, 129;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ea372;
+  --ion-color-success-tint: #28c291;
+  
+  // Warning colors
+  --ion-color-warning: #f59e0b;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #d88b0a;
+  --ion-color-warning-tint: #f6a823;
+  
+  // Danger colors
+  --ion-color-danger: #ef4444;
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d23c3c;
+  --ion-color-danger-tint: #f15757;
+  
+  // Background colors
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+  
+  // Text colors
+  --ion-text-color: #1f2937;
+  --ion-text-color-rgb: 31, 41, 55;
+  
+  // Card colors
+  --ion-card-background: #ffffff;
+  --ion-card-background-rgb: 255, 255, 255;
+  
+  // Border colors
+  --ion-border-color: #e5e7eb;
+  --ion-border-color-rgb: 229, 231, 235;
+  
+  // Shadow colors
+  --ion-shadow-color: rgba(0, 0, 0, 0.1);
+  --ion-shadow-color-rgb: 0, 0, 0, 0.1;
+}
+
+/**
+ * Dark Mode Support
+ * -----------------------------------------------------
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Dark mode background colors
+    --ion-background-color: #1f2937;
+    --ion-background-color-rgb: 31, 41, 55;
+    
+    // Dark mode text colors
+    --ion-text-color: #f9fafb;
+    --ion-text-color-rgb: 249, 250, 251;
+    
+    // Dark mode card colors
+    --ion-card-background: #374151;
+    --ion-card-background-rgb: 55, 65, 81;
+    
+    // Dark mode border colors
+    --ion-border-color: #4b5563;
+    --ion-border-color-rgb: 75, 85, 99;
+    
+    // Dark mode shadow colors
+    --ion-shadow-color: rgba(0, 0, 0, 0.3);
+    --ion-shadow-color-rgb: 0, 0, 0, 0.3;
+  }
+  
+  // Dark mode specific overrides
+  ion-content {
+    --background: #1f2937;
+  }
+  
+  ion-card {
+    --background: #374151;
+    --color: #f9fafb;
+  }
+  
+  ion-item {
+    --background: #374151;
+    --color: #f9fafb;
+    --border-color: #4b5563;
+  }
+  
+  ion-input, ion-textarea {
+    --background: #374151;
+    --color: #f9fafb;
+    --placeholder-color: #9ca3af;
+  }
+  
+  ion-tab-bar {
+    --background: rgba(55, 65, 81, 0.95);
+    --border-color: #4b5563;
+  }
+  
+  ion-toolbar {
+    --background: #1f2937;
+    --color: #f9fafb;
+  }
+  
+  // Dark mode for custom classes
+  .card-elevated {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .section-header {
+    color: #f9fafb;
+    
+    &::after {
+      background: linear-gradient(to right, #14b8a6, #475569);
+    }
+  }
+  
+  .status-badge {
+    &.success {
+      background-color: #065f46;
+      color: #6ee7b7;
+    }
+    
+    &.warning {
+      background-color: #92400e;
+      color: #fcd34d;
+    }
+    
+    &.error {
+      background-color: #991b1b;
+      color: #fca5a5;
+    }
+  }
+  
+  .form-group label {
+    color: #f9fafb;
+  }
+  
+  .form-error {
+    color: #fca5a5;
+  }
+  
+  .empty-state {
+    .text-gray-800 {
+      color: #f9fafb;
+    }
+    
+    .text-gray-500 {
+      color: #9ca3af;
+    }
+    
+    .bg-gray-100 {
+      background-color: #374151;
+    }
+    
+    .text-gray-400 {
+      color: #6b7280;
+    }
+  }
+  
+  .loading-skeleton {
+    .bg-gray-200 {
+      background-color: #4b5563;
+    }
+  }
+}
+
+/**
+ * High Contrast Mode Support
+ * -----------------------------------------------------
+ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --ion-border-color: #000000;
+    --ion-shadow-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .card-elevated {
+    border-width: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .btn-press {
+    border: 2px solid currentColor;
+  }
+}
+
+/**
+ * Reduced Motion Support
+ * -----------------------------------------------------
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .card-animate {
+    animation: none;
+  }
+  
+  .btn-press {
+    transition: none;
+  }
+  
+  .card-elevated {
+    transition: none;
+  }
+}

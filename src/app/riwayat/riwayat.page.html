@@ -1,0 +1,142 @@
+<ion-header class="ion-no-border">
+  <!-- Header section with filters (now fixed) -->
+  <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-4 px-4 rounded-b-3xl">
+    <h2 class="font-bold text-2xl mb-2">Riwayat Transaksi</h2>
+    <p class="text-sm text-blue-100 mb-2">Daftar transaksi simpanan, pembayaran, dan pinjaman Anda</p>
+    
+    <!-- Filter tabs -->
+    <div class="flex bg-white/10 rounded-xl p-1 mt-4">
+      <button 
+        *ngFor="let filter of filters" 
+        [ngClass]="{'bg-white text-teal-600 font-medium': activeFilter === filter.id, 'text-white': activeFilter !== filter.id}"
+        class="flex-1 py-2 text-sm rounded-lg transition-all btn-press"
+        (click)="setFilter(filter.id)">
+        {{ filter.name }}
+      </button>
+    </div>
+  </div>
+  
+  <div class="font-sans">
+    <!-- Enhanced Loading state -->
+    <div *ngIf="isLoading" class="px-4 pt-6">
+      <div class="loading-skeleton">
+        <div class="animate-pulse">
+          <div *ngFor="let item of [1,2,3]" class="mb-6">
+            <div class="flex items-center mb-3">
+              <div class="h-px bg-gray-200 flex-grow mr-3"></div>
+              <div class="h-4 bg-gray-200 rounded w-20"></div>
+              <div class="h-px bg-gray-200 flex-grow ml-3"></div>
+            </div>
+            
+            <div class="space-y-3">
+              <div *ngFor="let transaction of [1,2]" class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                  <div class="flex-1">
+                    <div class="h-4 bg-gray-200 rounded w-1/2 mb-1"></div>
+                    <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                  </div>
+                  <div class="h-4 bg-gray-200 rounded w-16"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction list -->
+    <div *ngIf="!isLoading" class="px-4 pt-6 card-animate">
+      <!-- Month section -->
+      <div *ngFor="let month of filteredTransactions">
+        <div class="flex items-center mb-3">
+          <div class="h-px bg-gray-200 flex-grow mr-3"></div>
+          <h3 class="text-sm font-semibold text-gray-500">{{ month.month }}</h3>
+          <div class="h-px bg-gray-200 flex-grow ml-3"></div>
+        </div>
+        
+        <div class="space-y-3 mb-6">
+          <!-- Transactions for this month -->
+          <div *ngFor="let transaction of month.transactions" 
+               class="card-elevated p-4 flex items-center">
+            <div 
+              [ngClass]="{
+                'bg-blue-100': transaction.type === 'income',
+                'bg-red-100': transaction.type === 'expense'
+              }" 
+              class="w-10 h-10 rounded-full flex items-center justify-center mr-3">
+              <ion-icon 
+                [name]="transaction.type === 'income' ? 'arrow-down' : 'arrow-up'" 
+                [ngClass]="{
+                  'text-blue-600': transaction.type === 'income',
+                  'text-red-600': transaction.type === 'expense'
+                }"
+              ></ion-icon>
+            </div>
+            
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="font-medium text-gray-800">{{ transaction.title }}</p>
+                <p class="font-bold" 
+                  [ngClass]="{
+                    'text-blue-600': transaction.type === 'income',
+                    'text-red-600': transaction.type === 'expense'
+                  }">
+                  {{ transaction.amount }}
+                </p>
+              </div>
+              <div class="flex justify-between mt-1">
+                <p class="text-xs text-gray-500">{{ transaction.date }}</p>
+                <span class="status-badge success">
+                  Berhasil
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced empty state -->
+      <div *ngIf="filteredTransactions.length === 0" class="empty-state">
+        <div class="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+          <ion-icon name="document-text-outline" class="text-gray-400 text-3xl"></ion-icon>
+        </div>
+        <h3 class="text-lg font-medium text-gray-800 mb-2">Tidak ada transaksi</h3>
+        <p class="text-sm text-gray-500 text-center">Belum ada riwayat transaksi untuk kategori ini</p>
+        <div class="mt-4">
+          <button class="bg-teal-500 text-white px-4 py-2 rounded-xl text-sm font-medium btn-press">
+            Mulai Transaksi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <ion-tab-bar class="border-t border-gray-200 py-2">
+    <ion-tab-button tab="home" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label class="text-xs">Home</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="pinjaman" routerLink="/pinjaman">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-label class="text-xs">Pinjaman</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="riwayat" selected>
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-label class="text-xs">Riwayat</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ajukan" routerLink="/ajukan">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label class="text-xs">Ajukan</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="Profile" routerLink="/profile">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label class="text-xs">Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-header>

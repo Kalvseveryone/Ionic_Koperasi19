@@ -1,0 +1,91 @@
+// Welcome page styles
+
+ion-content {
+  --background: linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #ccfbf1 100%);
+}
+
+// Logo animation
+.w-24 {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Feature cards animation
+.bg-white\/80 {
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Button hover effects
+button {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Feature icons animation
+.w-10 {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+    background-color: #14b8a6 !important;
+    
+    ion-icon {
+      color: white !important;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #134e4a 100%);
+  }
+  
+  .bg-white\/80 {
+    background-color: rgba(30, 41, 59, 0.8) !important;
+    color: #f1f5f9;
+  }
+  
+  h1, h2, h3 {
+    color: #f8fafc !important;
+  }
+  
+  p {
+    color: #cbd5e1 !important;
+  }
+  
+  .text-slate-600 {
+    color: #94a3b8 !important;
+  }
+  
+  .text-slate-500 {
+    color: #64748b !important;
+  }
+} 

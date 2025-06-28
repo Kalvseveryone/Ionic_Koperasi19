@@ -1,0 +1,72 @@
+// Custom styles to complement Tailwind CSS
+
+// Add some padding at the bottom to ensure content isn't hidden
+ion-content::part(scroll) {
+  padding-bottom: 70px;
+}
+
+// Ensure toolbar is transparent and properly positioned
+ion-header.ion-no-border {
+  position: absolute;
+}
+
+ion-toolbar {
+  --background: transparent;
+}
+
+// Fixed bottom navigation
+ion-tab-bar {
+  --background: white;
+  padding-bottom: env(safe-area-inset-bottom);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+ion-tab-button {
+  --ripple-color: rgba(59, 130, 246, 0.1);
+  
+  &[selected] {
+    ion-icon, ion-label {
+      color: #82afb3 !important;
+      font-weight: 500;
+    }
+  }
+}
+
+// Enhance card and rounded corners
+.rounded-2xl {
+  overflow: hidden;
+}
+
+// Add subtle animation to payment button
+button.bg-blue-500 {
+  transition: all 0.2s ease;
+  
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// Add subtle box shadow to cards
+.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+// Progress bar animation
+.h-2.bg-green-400 {
+  transition: width 1s ease-in-out;
+}
+
+// Add custom scrolling behavior
+ion-content {
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

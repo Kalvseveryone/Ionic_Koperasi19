@@ -1,0 +1,191 @@
+<ion-content>
+  <div class="font-sans">
+    <!-- Header section -->
+    <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-4 px-4 rounded-b-3xl">
+      <h2 class="font-bold text-2xl mb-2">Ajukan Pinjaman</h2>
+      <p class="text-sm text-blue-100 mb-2">Silakan isi formulir pengajuan pinjaman di bawah ini</p>
+    </div>
+    
+    <!-- Form section -->
+    <div class="px-4 pt-6">
+      <div class="card-elevated p-6 mb-6 card-animate">
+        <h3 class="section-header">Formulir Pengajuan</h3>
+        
+        <!-- Amount Input -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nominal Pinjaman</label>
+          <div class="relative rounded-md">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <span class="text-gray-500 sm:text-sm">Rp</span>
+            </div>
+            <input 
+              type="number" 
+              [(ngModel)]="formPinjaman.jumlah" 
+              class="focus:outline-none focus:ring-2 focus:ring-teal-500 block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 transition-all"
+              placeholder="5.000.000"
+              min="100000"
+              max="10000000">
+          </div>
+          <p class="mt-1 text-xs text-gray-500">Minimal Rp 100.000 - Maksimal Rp 10.000.000</p>
+          <div *ngIf="formPinjaman.jumlah && (formPinjaman.jumlah < 100000 || formPinjaman.jumlah > 10000000)" class="form-error">
+            <ion-icon name="alert-circle"></ion-icon>
+            Nominal harus antara Rp 100.000 - Rp 10.000.000
+          </div>
+        </div>
+        
+        <!-- Jangka Waktu Input -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Jangka Waktu (Bulan)</label>
+          <div class="grid grid-cols-3 gap-2">
+            <div *ngFor="let option of jangkaWaktuOptions">
+              <button 
+                type="button"
+                [ngClass]="{'bg-teal-50 border-teal-500 text-teal-700': formPinjaman.jangka_waktu === option.value, 'bg-white text-gray-700 border-gray-200': formPinjaman.jangka_waktu !== option.value}"
+                class="w-full border rounded-xl py-2 px-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all btn-press"
+                (click)="selectJangkaWaktu(option.value)">
+                {{ option.label }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tujuan Pinjaman Input -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tujuan Pinjaman</label>
+          <textarea 
+            [(ngModel)]="formPinjaman.tujuan"
+            class="focus:outline-none focus:ring-2 focus:ring-teal-500 block w-full px-3 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 transition-all"
+            rows="3"
+            placeholder="Jelaskan tujuan penggunaan dana pinjaman"
+            required></textarea>
+          <p class="mt-1 text-xs text-gray-500">Jelaskan tujuan penggunaan dana pinjaman</p>
+          <div *ngIf="formPinjaman.tujuan && formPinjaman.tujuan.length < 10" class="form-error">
+            <ion-icon name="alert-circle"></ion-icon>
+            Tujuan pinjaman minimal 10 karakter
+          </div>
+        </div>
+        
+        <!-- Loan Summary -->
+        <div class="bg-gray-50 rounded-xl p-4 mb-6">
+          <h4 class="font-medium text-gray-800 mb-3">Ringkasan Pinjaman</h4>
+          <div class="space-y-2">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Jumlah Pinjaman</span>
+              <span class="font-semibold text-gray-800">Rp {{ formatAmount(formPinjaman.jumlah) }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Bunga</span>
+              <span class="font-semibold text-gray-800">{{ bungaPerTahun }}% per tahun</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Jangka Waktu</span>
+              <span class="font-semibold text-gray-800">{{ getJangkaWaktuLabel() }}</span>
+            </div>
+            <hr class="my-2 border-gray-200">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Cicilan per Bulan</span>
+              <span class="font-bold text-gray-800">Rp {{ calculateMonthlyPayment() }}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">Total Pembayaran</span>
+              <span class="font-bold text-gray-800">Rp {{ calculateTotalPayment() }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Terms & Conditions -->
+        <div class="form-group">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input 
+                id="terms" 
+                type="checkbox" 
+                [(ngModel)]="formPinjaman.agreeToTerms"
+                class="focus:ring-teal-500 h-4 w-4 text-teal-600 border-gray-300 rounded">
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="text-gray-600">Saya setuju dengan <a href="#" class="text-teal-600 hover:text-teal-700 transition-colors">syarat dan ketentuan</a> yang berlaku</label>
+            </div>
+          </div>
+          <div *ngIf="!formPinjaman.agreeToTerms && formSubmitted" class="form-error">
+            <ion-icon name="alert-circle"></ion-icon>
+            Anda harus menyetujui syarat dan ketentuan
+          </div>
+        </div>
+        
+        <!-- Submit Button -->
+        <div>
+          <button 
+            type="button" 
+            [disabled]="!isFormValid() || isSubmitting" 
+            [ngClass]="{'bg-teal-500 hover:bg-teal-600': isFormValid() && !isSubmitting, 'bg-gray-300 cursor-not-allowed': !isFormValid() || isSubmitting}"
+            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none transition-all btn-press"
+            (click)="submitPinjamanApplication()">
+            <ion-spinner *ngIf="isSubmitting" name="crescent" class="mr-2"></ion-spinner>
+            <ion-icon *ngIf="!isSubmitting" name="checkmark-circle" class="mr-2"></ion-icon>
+            {{ isSubmitting ? 'Mengajukan...' : 'Ajukan Pinjaman' }}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Additional Information -->
+      <div class="card-elevated p-4 mb-20 card-animate" style="animation-delay: 0.1s;">
+        <h3 class="text-sm font-bold text-gray-800 mb-3">Persyaratan Pinjaman</h3>
+        <ul class="text-xs text-gray-600 space-y-2">
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Anggota koperasi aktif minimal 6 bulan</span>
+          </li>
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Memiliki simpanan aktif</span>
+          </li>
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Tidak memiliki tunggakan pinjaman lain</span>
+          </li>
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Proses persetujuan 1-3 hari kerja</span>
+          </li>
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Minimal pinjaman Rp 100.000</span>
+          </li>
+          <li class="flex items-start">
+            <ion-icon name="checkmark-circle" class="text-green-500 mr-2 text-lg"></ion-icon>
+            <span>Maksimal jangka waktu 12 bulan</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <ion-tab-bar class="border-t border-gray-200 py-2">
+    <ion-tab-button tab="home" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label class="text-xs">Home</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="pinjaman" routerLink="/pinjaman">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-label class="text-xs">Pinjaman</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="riwayat" routerLink="/riwayat">
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-label class="text-xs">Riwayat</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ajukan" selected>
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label class="text-xs">Ajukan</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="Profile" routerLink="/profile">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label class="text-xs">Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-content>

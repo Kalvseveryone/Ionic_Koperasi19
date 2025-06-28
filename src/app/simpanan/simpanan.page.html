@@ -1,0 +1,183 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bg-gradient-to-r from-teal-500 to-slate-600 text-white">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="font-bold text-xl">Simpanan</ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+  <div class="font-sans">
+    <!-- Header section -->
+    <div class="bg-gradient-to-r from-teal-500 to-slate-600 text-white py-4 px-4 rounded-b-3xl mt-4">
+      <!-- Total Simpanan Card -->
+      <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-sm mt-4 card-elevated">
+        <p class="text-blue-100 mb-1">Total Simpanan</p>
+        <h2 class="text-3xl font-bold mb-3">Rp {{ formatAmount(totalSimpanan) }}</h2>
+        <div class="flex justify-between items-center">
+          <p class="text-xs text-blue-100">Update: {{currentDate | date:'dd MMM yyyy'}}</p>
+          <a class="bg-white text-slate-600 px-3 py-1 rounded-full text-xs font-medium btn-press" routerLink="/riwayat">
+            Lihat Riwayat
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Simpanan Cards -->
+    <div class="px-4 pt-6 tab-content">
+      <!-- Simpanan Pokok -->
+      <div class="card-elevated p-5 mb-5 card-animate">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Simpanan Pokok</h3>
+            <p class="text-xs text-gray-500 mt-1">Simpanan yang dibayarkan satu kali saat mendaftar</p>
+          </div>
+          <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center">
+            <ion-icon name="wallet" class="text-blue-600 text-xl"></ion-icon>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-100 pt-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-sm text-gray-500">Jumlah</p>
+              <p class="text-xl font-bold text-gray-800">Rp {{ formatAmount(simpananPokok) }}</p>
+            </div>
+            <span class="status-badge success">Lunas</span>
+          </div>
+          
+          <div class="mt-4">
+            <p class="text-xs text-gray-500">Tanggal Pembayaran</p>
+            <p class="text-sm font-medium text-gray-800">{{ tanggalSimpananPokok }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Simpanan Wajib -->
+      <div class="card-elevated p-5 mb-5 card-animate" style="animation-delay: 0.1s;">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Simpanan Wajib</h3>
+            <p class="text-xs text-gray-500 mt-1">Simpanan yang dibayarkan setiap bulan</p>
+          </div>
+          <div class="bg-indigo-100 w-10 h-10 rounded-full flex items-center justify-center">
+            <ion-icon name="calendar" class="text-indigo-600 text-xl"></ion-icon>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-100 pt-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-sm text-gray-500">Total Simpanan</p>
+              <p class="text-xl font-bold text-gray-800">Rp {{ formatAmount(simpananWajib.total) }}</p>
+            </div>
+            <span *ngIf="simpananWajib.status" class="status-badge success">Lunas</span>
+          </div>
+          
+          <div class="mt-4 space-y-2">
+            <div class="flex justify-between">
+              <p class="text-xs text-gray-500">Jumlah per Bulan</p>
+              <p class="text-sm font-medium text-gray-800">Rp {{ formatAmount(simpananWajib.perBulan) }}</p>
+            </div>
+            <div class="flex justify-between">
+              <p class="text-xs text-gray-500">Pembayaran Terakhir</p>
+              <p class="text-sm font-medium text-gray-800">{{ simpananWajib.tanggalTerakhir }}</p>
+            </div>
+            <div class="flex justify-between">
+              <p class="text-xs text-gray-500">Jatuh Tempo Berikutnya</p>
+              <p class="text-sm font-medium text-gray-800">{{ simpananWajib.jatuhTempo }}</p>
+            </div>
+          </div>
+          
+          <button class="w-full mt-4 bg-teal-500 text-white py-2 rounded-xl text-sm font-medium flex items-center justify-center btn-press"
+                  (click)="bayarSimpananWajib()">
+            <ion-icon name="cash-outline" class="mr-2"></ion-icon>
+            Bayar Simpanan Wajib
+          </button>
+        </div>
+      </div>
+      
+      <!-- Simpanan Sukarela -->
+      <div class="card-elevated p-5 mb-5 card-animate" style="animation-delay: 0.2s;">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Simpanan Sukarela</h3>
+            <p class="text-xs text-gray-500 mt-1">Simpanan yang dibayarkan secara sukarela</p>
+          </div>
+          <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center">
+            <ion-icon name="leaf" class="text-green-600 text-xl"></ion-icon>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-100 pt-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-sm text-gray-500">Total Simpanan</p>
+              <p class="text-xl font-bold text-gray-800">Rp {{ formatAmount(simpananSukarela.total) }}</p>
+            </div>
+          </div>
+          
+          <div class="mt-4 space-y-2">
+            <div class="flex justify-between">
+              <p class="text-xs text-gray-500">Pembayaran Terakhir</p>
+              <p class="text-sm font-medium text-gray-800">{{ simpananSukarela.tanggalTerakhir }}</p>
+            </div>
+            <div class="flex justify-between">
+              <p class="text-xs text-gray-500">Jumlah Terakhir</p>
+              <p class="text-sm font-medium text-gray-800">Rp {{ formatAmount(simpananSukarela.jumlahTerakhir) }}</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3 mt-4">
+            <button class="bg-teal-500 text-white py-2 rounded-xl text-sm font-medium flex items-center justify-center btn-press"
+                    (click)="tambahSimpananSukarela()">
+              <ion-icon name="add-outline" class="mr-2"></ion-icon>
+              Tambah
+            </button>
+            <button class="bg-red-500 border text-white py-2 rounded-xl text-sm font-medium flex items-center justify-center btn-press"
+                    (click)="tarikSimpananSukarela()">
+              <ion-icon name="arrow-down-outline" class="mr-2"></ion-icon>
+              Tarik
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Add extra space at the bottom to avoid content being hidden by navigation bar -->
+      <div class="pb-20"></div>
+    </div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <ion-tab-bar class="border-t border-gray-200 py-2">
+    <ion-tab-button tab="home" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label class="text-xs">Home</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="pinjaman" routerLink="/pinjaman">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-label class="text-xs">Pinjaman</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="riwayat" routerLink="/riwayat">
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-label class="text-xs">Riwayat</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ajukan" routerLink="/ajukan">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label class="text-xs">Ajukan</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="profile" routerLink="/profile">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label class="text-xs">Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-content>

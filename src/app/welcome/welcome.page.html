@@ -1,0 +1,76 @@
+<ion-content class="bg-gradient-to-br from-teal-50 via-slate-50 to-teal-100">
+  <div class="flex flex-col items-center justify-center min-h-screen px-6">
+    <!-- Logo and app name -->
+    <div class="text-center mb-8">
+      <div class="flex justify-center mb-6">
+        <div class="w-24 h-24 bg-gradient-to-br from-teal-500 to-slate-600 rounded-full flex items-center justify-center shadow-lg">
+          <img src="assets/img/logo_.png" alt="Logo KitaAda" class="w-16 h-16">
+        </div>
+      </div>
+      <h1 class="text-3xl font-bold text-slate-800 mb-2">KitaAda</h1>
+      <p class="text-lg text-slate-600">Sistem Keuangan Koperasi</p>
+    </div>
+
+    <!-- App features -->
+    <div class="w-full max-w-sm mb-8">
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+        <h2 class="text-xl font-semibold text-slate-800 mb-4 text-center">Fitur Utama</h2>
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center mr-3">
+              <ion-icon name="wallet-outline" class="text-teal-600 text-lg"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-800">Simpanan</h3>
+              <p class="text-sm text-slate-600">Kelola simpanan Anda dengan mudah</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center mr-3">
+              <ion-icon name="card-outline" class="text-teal-600 text-lg"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-800">Pinjaman</h3>
+              <p class="text-sm text-slate-600">Ajukan dan kelola pinjaman</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center mr-3">
+              <ion-icon name="analytics-outline" class="text-teal-600 text-lg"></ion-icon>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-800">Riwayat</h3>
+              <p class="text-sm text-slate-600">Lihat riwayat transaksi lengkap</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="w-full max-w-sm space-y-4">
+      <button 
+        (click)="goToLogin()" 
+        class="w-full py-4 bg-gradient-to-r from-teal-500 to-slate-600 text-white rounded-2xl font-bold text-lg shadow-lg flex items-center justify-center">
+        <ion-icon name="log-in-outline" class="mr-2" aria-hidden="true"></ion-icon>
+        Mulai Sekarang
+      </button>
+      
+      <div class="text-center">
+        <p class="text-sm text-slate-600 mb-2">Belum punya akun?</p>
+        <button 
+          (click)="contactAdmin()" 
+          class="text-teal-600 font-medium text-sm hover:underline">
+          Hubungi Admin
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-8 text-center">
+      <p class="text-xs text-slate-500">© 2024 KitaAda. Semua hak dilindungi.</p>
+    </div>
+  </div>
+</ion-content> 

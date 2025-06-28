@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AdaKita - Aplikasi Koperasi Digital</title>
+
+  <base href="/" />
+
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Aplikasi koperasi digital untuk mengelola simpanan, pinjaman, dan transaksi keuangan" />
+  <meta name="keywords" content="koperasi, simpanan, pinjaman, keuangan, digital" />
+  <meta name="author" content="AdaKita" />
+  <meta name="theme-color" content="#14b8a6" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AdaKita" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="AdaKita - Aplikasi Koperasi Digital" />
+  <meta property="og:description" content="Aplikasi koperasi digital untuk mengelola simpanan, pinjaman, dan transaksi keuangan" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adakita.com" />
+  <meta property="og:image" content="assets/img/logo_.png" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AdaKita - Aplikasi Koperasi Digital" />
+  <meta name="twitter:description" content="Aplikasi koperasi digital untuk mengelola simpanan, pinjaman, dan transaksi keuangan" />
+  <meta name="twitter:image" content="assets/img/logo_.png" />
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/icon/favicon.png" />
+  
+  <!-- Manifest for PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            slate: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.6s ease-out',
+            'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': {
+                opacity: '0',
+                transform: 'translateY(20px)'
+              },
+              '100%': {
+                opacity: '1',
+                transform: 'translateY(0)'
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+</html>

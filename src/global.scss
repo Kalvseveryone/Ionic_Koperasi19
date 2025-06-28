@@ -1,0 +1,612 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* Dark mode disabled - forcing light mode only */
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/**
+ * Custom Animation Styles
+ * -----------------------------------------------------
+ * Custom animations for enhanced user experience
+ */
+
+/* Page transition animations */
+ion-router-outlet {
+  animation-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+
+/* Tab bar animations */
+ion-tab-bar {
+  ion-tab-button {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: #82afb3;
+      transform: translateX(-50%);
+      transition: width 0.2s ease;
+      border-radius: 3px 3px 0 0;
+    }
+    
+    &[selected] {
+      &::before {
+        width: 30px;
+      }
+      
+      ion-icon {
+        transform: translateY(-2px);
+      }
+    }
+    
+    ion-icon {
+      transition: transform 0.2s ease;
+    }
+    
+    &:active {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+/* Button ripple effect */
+.ion-activatable {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card hover animations */
+ion-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Quick menu icons animation */
+.menu-button {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/**
+ * Header & Status Bar Fixes
+ * -----------------------------------------------------
+ * Fix header overlapping with status bar
+ */
+
+/* Ensure header doesn't overlap with status bar */
+ion-header {
+  padding-top: env(safe-area-inset-top);
+  background: transparent;
+}
+
+ion-toolbar {
+  --padding-top: env(safe-area-inset-top);
+  --min-height: 56px;
+  --background: transparent;
+}
+
+/* Safe area handling for content */
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+  --padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Home page specific fixes */
+ion-content {
+  --padding-top: 0; /* Remove default padding for home page */
+}
+
+/* Home page header section */
+.bg-gradient-to-r.from-teal-500.to-slate-600 {
+  padding-top: calc(env(safe-area-inset-top) + 1rem);
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure balance card is fully visible */
+.card-elevated {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1rem;
+}
+
+/* Bottom navigation safe area */
+ion-tab-bar {
+  padding-bottom: env(safe-area-inset-bottom);
+  --background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Specific fixes for pinjaman and simpanan pages */
+ion-content.ion-padding-top {
+  --padding-top: calc(env(safe-area-inset-top) + 20px);
+}
+
+/* Ensure tab content has proper spacing */
+.tab-content {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+/**
+ * Enhanced Visual Hierarchy
+ * -----------------------------------------------------
+ */
+
+.section-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(to right, #14b8a6, #475569);
+    border-radius: 2px;
+  }
+}
+
+.card-elevated {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/**
+ * Enhanced Loading & Empty States
+ * -----------------------------------------------------
+ */
+
+.loading-skeleton {
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .h-4 {
+    height: 1rem;
+  }
+  
+  .h-32 {
+    height: 8rem;
+  }
+  
+  .bg-gray-200 {
+    background-color: #e5e7eb;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .w-3\/4 {
+    width: 75%;
+  }
+  
+  .w-1\/2 {
+    width: 50%;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  
+  .w-20 {
+    width: 5rem;
+  }
+  
+  .h-20 {
+    height: 5rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .text-gray-800 {
+    color: #1f2937;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .text-gray-500 {
+    color: #6b7280;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/**
+ * Enhanced Form Design
+ * -----------------------------------------------------
+ */
+
+.form-group {
+  margin-bottom: 1.5rem;
+  
+  label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  ion-input, ion-textarea {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    --border-radius: 12px;
+    --border-width: 1px;
+    --border-color: #e5e7eb;
+    --background: #ffffff;
+    
+    &:focus {
+      --border-color: #14b8a6;
+      --border-width: 2px;
+    }
+  }
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  
+  ion-icon {
+    margin-right: 0.25rem;
+  }
+}
+
+/**
+ * Better Data Visualization
+ * -----------------------------------------------------
+ */
+
+.progress-bar {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  
+  .progress-fill {
+    height: 0.5rem;
+    background: linear-gradient(to right, #14b8a6, #475569);
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+  }
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  &.success {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+  
+  &.warning {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  &.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+}
+
+/**
+ * Enhanced Tab Bar
+ * -----------------------------------------------------
+ */
+
+ion-tab-bar {
+  ion-tab-button {
+    --ripple-color: rgba(20, 184, 166, 0.1);
+    
+    &[selected] {
+      ion-icon, ion-label {
+        color: #14b8a6 !important;
+        font-weight: 600;
+      }
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 3px;
+        background: #14b8a6;
+        border-radius: 0 0 2px 2px;
+      }
+    }
+  }
+}
+
+/**
+ * Micro-interactions
+ * -----------------------------------------------------
+ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-animate {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.btn-press {
+  transition: transform 0.1s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/**
+ * Typography System
+ * -----------------------------------------------------
+ */
+
+.text-display {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.text-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.text-body {
+  font-size: 1rem;
+}
+
+.text-caption {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/**
+ * Force Light Mode Only
+ * -----------------------------------------------------
+ * Disable dark mode and force light mode regardless of system preference
+ */
+
+/* Force light mode variables */
+:root {
+  // Light mode background colors
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+  
+  // Light mode text colors
+  --ion-text-color: #1f2937;
+  --ion-text-color-rgb: 31, 41, 55;
+  
+  // Light mode card colors
+  --ion-card-background: #ffffff;
+  --ion-card-background-rgb: 255, 255, 255;
+  
+  // Light mode border colors
+  --ion-border-color: #e5e7eb;
+  --ion-border-color-rgb: 229, 231, 235;
+  
+  // Light mode shadow colors
+  --ion-shadow-color: rgba(0, 0, 0, 0.1);
+  --ion-shadow-color-rgb: 0, 0, 0, 0.1;
+}
+
+/* Override any dark mode preferences */
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Force light mode even when system prefers dark
+    --ion-background-color: #ffffff !important;
+    --ion-background-color-rgb: 255, 255, 255 !important;
+    --ion-text-color: #1f2937 !important;
+    --ion-text-color-rgb: 31, 41, 55 !important;
+    --ion-card-background: #ffffff !important;
+    --ion-card-background-rgb: 255, 255, 255 !important;
+    --ion-border-color: #e5e7eb !important;
+    --ion-border-color-rgb: 229, 231, 235 !important;
+    --ion-shadow-color: rgba(0, 0, 0, 0.1) !important;
+    --ion-shadow-color-rgb: 0, 0, 0, 0.1 !important;
+  }
+  
+  // Force light mode for all components
+  ion-content {
+    --background: #ffffff !important;
+  }
+  
+  ion-card {
+    --background: #ffffff !important;
+    --color: #1f2937 !important;
+  }
+  
+  ion-item {
+    --background: #ffffff !important;
+    --color: #1f2937 !important;
+    --border-color: #e5e7eb !important;
+  }
+  
+  ion-input, ion-textarea {
+    --background: #ffffff !important;
+    --color: #1f2937 !important;
+    --placeholder-color: #6b7280 !important;
+  }
+  
+  ion-tab-bar {
+    --background: rgba(255, 255, 255, 0.95) !important;
+    --border-color: #e5e7eb !important;
+  }
+  
+  ion-toolbar {
+    --background: #ffffff !important;
+    --color: #1f2937 !important;
+  }
+}
+
+/**
+ * Login Page Logo Fixes
+ * -----------------------------------------------------
+ */
+
+/* Login page logo container */
+.login-logo-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #14b8a6 0%, #475569 100%);
+  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(20, 184, 166, 0.4);
+  }
+}
+
+/* Login page logo image */
+.login-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Ensure logo displays properly on all devices */
+@media (max-width: 480px) {
+  .login-logo-container {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .login-logo-container {
+    width: 7rem;
+    height: 7rem;
+  }
+}
